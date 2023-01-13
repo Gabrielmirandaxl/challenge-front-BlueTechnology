@@ -1,0 +1,69 @@
+<template>
+  <div>
+    <div class="field col-12 md:col-4 personal-data">
+            <div class="p-inputgroup">
+                 <span class="p-inputgroup-addon">
+                            <i class="pi pi-user"></i>
+                 </span>
+                 <span class="p-float-label">
+                    <InputText id="inputgroup" type="text" v-model="name" />
+                    <label for="inputgroup">Nome</label>
+                 </span>
+              </div>
+            </div>
+
+            <div class="field col-12 md:col-4 personal-data">
+            <div class="p-inputgroup">
+                 <span class="p-inputgroup-addon">
+                            <i class="pi pi-at"></i>
+                 </span>
+                 <span class="p-float-label">
+                    <InputText id="inputgroup" type="text" v-model="email" />
+                    <label for="inputgroup">Email</label>
+                 </span>
+              </div>
+            </div>
+
+            <div class="field col-12 md:col-4 personal-data">
+            <div class="p-inputgroup">
+                 <span class="p-inputgroup-addon">
+                            <i class="pi pi-phone"></i>
+                 </span>
+                 <span class="p-float-label">
+                    <InputMask id="inputgroup" type="text" v-model="phone" mask="(99)99999-9999" />
+                    <label for="inputgroup">Telefone</label>
+                 </span>
+              </div>
+            </div>
+
+            <div class="button">
+              <Button label="Cadastrar" class="p-button-raised p-button-rounded p-button-success" />
+            </div>
+               
+  </div>
+</template>
+
+<script>
+  export default{
+    name: "Form",
+    data(){
+      return{
+        name: null,
+        email: null,
+        phone: null
+      }
+    }
+  }
+</script>
+
+<style scoped>
+
+.personal-data{
+    margin: 30px 0px 0px 0px;
+  }
+
+  .button{
+    text-align: center;
+    margin: 30px 0px 0px 0px ;
+  }
+</style>
