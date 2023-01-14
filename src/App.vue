@@ -1,16 +1,18 @@
 <template>
-  <div>
-    <HeaderVue/>
-  </div>
+
+ <component-table/>  
+ 
 </template>
 
 
 <script>
-  import HeaderVue from './components/Header/Header.vue';
+ import ComponentTable from './components/Table/ComponentTable.vue'
+
   export default{
     name: "App",
     components: {
-      HeaderVue
+    ComponentTable,  
+      
     }
   }
 </script>
