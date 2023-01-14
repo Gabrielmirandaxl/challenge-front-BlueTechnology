@@ -85,8 +85,8 @@
                         ></Button>
                         <Button
                             icon="pi pi-pencil"
-                            class="p-button-warning"
-                            @click="updateUser(props.data)"
+                            class="p-button-warning btn-update"
+                            @click="openModalUpdate(props.data)"
                         ></Button>
                     </template>
                 </Column>
@@ -124,16 +124,15 @@ export default {
         },
 
         enviar() {
+
             let user = {
                 id: this.id,
                 name: this.name,
                 email: this.email,
                 phone: this.phone,
             };
-            console.log(this.id);
 
             if (user.id != '') {
-                this.clearFields();
                 this.updateUser(user);
             } else {
                 this.registerUser(user);
@@ -142,6 +141,7 @@ export default {
 
         openModal() {
             this.modal = true;
+            this.clearFields()
             this.msg1 = 'cadastrar';
             this.msg2 = 'Registro de usuário';
         },
@@ -172,17 +172,26 @@ export default {
         },
 
         updateUser(data) {
-            this.modal = true;
-            this.msg1 = 'atualizar';
-            this.msg2 = 'Atualizar usuário';
-            this.id = data.id;
-            console.log(this.id);
-            this.name = data.name;
-            this.email = data.email;
-            this.phone = data.phone;
-
-            api.updateUser(data).then(() => {
-                this.getUsers();
+            api.update(data).then((response) => {
+              if(response.message){
+                this.$toast.add({
+                        severity: 'error',
+                        summary: 'error',
+                        detail: `${response.message}`,
+                        life: 6000,
+                    });
+              }else{
+                this.getUsers()
+                 this.clearFields()
+                 this.modal = false
+                 this.$toast.add({
+                        severity: 'success',
+                        summary: 'Sucesso',
+                        detail: 'Usuario atualizado',
+                        life: 6000,
+                    });
+              }
+               
             });
         },
 
@@ -192,7 +201,18 @@ export default {
             });
         },
 
+        openModalUpdate(data){
+          this.modal = true;
+            this.msg1 = 'atualizar';
+            this.msg2 = 'Atualizar usuário';
+            this.id = data.id;
+            this.name = data.name;
+            this.email = data.email;
+            this.phone = data.phone;
+        },
+
         clearFields() {
+          this.id = ''
             this.name = '';
             this.email = '';
             this.phone = '';
@@ -220,5 +240,8 @@ export default {
 .button {
     text-align: center;
     margin: 30px 0px 0px 0px;
+}
+.btn-update{
+  margin: 0px 0px 0px 15px;
 }
 </style>
