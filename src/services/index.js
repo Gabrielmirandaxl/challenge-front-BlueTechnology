@@ -5,7 +5,19 @@ export default{
       return api.get(url)
      },
 
-     registerUser(url, obj){
+     registerUser(obj){
         return api.post(url, obj)
+     },
+
+     deleteUser(id){
+      return api.delete(`${url}/${id}`)
+     },
+
+     updateUser(id){
+      return api.put(`${url}/${id}`)
      }
+
+     
+
+    
 }

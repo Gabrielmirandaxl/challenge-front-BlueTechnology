@@ -65,7 +65,7 @@
                 <Button
                   icon="pi pi-trash"
                   class="p-button-danger mr-1"
-                  @click="delete(props.data.id)"
+                  @click="deleteUser(props.data.id)"
                 ></Button>
                 <Button
                   icon="pi pi-pencil"
@@ -123,7 +123,7 @@ import api from '../../services/index'
           phone: this.phone
         }
       
-         api.registerUser("http://localhost:3000/user", obj).then((response) =>{
+         api.registerUser(obj).then((response) =>{
           if(response.message){
           this.$toast.add({severity:'error', summary: 'error', detail: `${response.message}`, life: 6000});
           
@@ -139,8 +139,10 @@ import api from '../../services/index'
        
       },
 
-      delete(id){
-       
+      deleteUser(id){
+         api.deleteUser(id).then(() => {
+           this.getUsers()
+         })
       },
 
       clearFields(){
