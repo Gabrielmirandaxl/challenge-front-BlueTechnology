@@ -13,8 +13,8 @@ export default{
       return api.delete(`${url}/${id}`)
      },
 
-     updateUser(id){
-      return api.put(`${url}/${id}`)
+     updateUser(obj){
+      return api.put(`${url}/${obj.id}`, obj)
      }
 
      
