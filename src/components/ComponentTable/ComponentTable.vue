@@ -12,7 +12,7 @@
         <Dialog
             :header="msg2"
             v-model:visible="modal"
-            :style="{ width: '300px', height: '390px' }"
+            :style="{ width: '320px', height: '460px' }"
         >
             <div class="field col-12 md:col-4 personal-data">
                 <div class="p-inputgroup">
@@ -59,6 +59,23 @@
                 </div>
             </div>
 
+            <div class="field col-12 md:col-4 personal-data">
+                <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon">
+                        <i class="pi pi-id-card"></i>
+                    </span>
+                    <span class="p-float-label">
+                        <InputMask
+                            id="inputgroup"
+                            type="text"
+                            v-model="cpf"
+                            mask="999.999.999-99"
+                        />
+                        <label for="inputgroup">Cpf</label>
+                    </span>
+                </div>
+            </div>
+
             <div class="button">
                 <Button
                     type="submit"
@@ -70,6 +87,22 @@
         </Dialog>
         <Toast position="top-right" />
         <ConfirmDialog></ConfirmDialog>
+        
+        <Dialog
+            header="Dados do usuário"
+            v-model:visible="modalShow"
+            :style="{ width: '320px', height: '230px' }"
+        >
+         
+        <ul>
+            <li>Nome: {{ name }}</li>
+            <li>E-mail: {{ email }}</li>
+            <li>Telefone: {{ phone }}</li>
+            <li>CPF: {{ cpf }}</li>
+        </ul>
+         
+
+        </Dialog>
 
         <div>
             <DataTable :value="users">
@@ -79,16 +112,25 @@
                 <Column field="phone" header="Telefone"></Column>
                 <Column header="Ações">
                     <template #body="props">
+
                         <Button
                             icon="pi pi-trash"
                             class="p-button-danger mr-1"
                             @click="deleteUser(props.data)"
                         ></Button>
+
                         <Button
                             icon="pi pi-pencil"
-                            class="p-button-warning btn-update"
+                            class="p-button-warning btn-actions"
                             @click="openModalUpdate(props.data)"
                         ></Button>
+
+                        <Button
+                            icon="pi pi-eye"
+                            class="p-button-secondary btn-actions"
+                            @click="openModalShow(props.data)"
+                        ></Button>
+
                     </template>
                 </Column>
             </DataTable>
@@ -104,10 +146,12 @@ export default {
     data() {
         return {
             modal: false,
+            modalShow: false,
             id: '',
             name: '',
             email: '',
             phone: '',
+            cpf: '',
             msg1: '',
             msg2: '',
             users: [],
@@ -131,6 +175,7 @@ export default {
                 name: this.name,
                 email: this.email,
                 phone: this.phone,
+                cpf: this.cpf,
             };
 
             if (user.id != '') {
@@ -224,13 +269,23 @@ export default {
             this.name = data.name;
             this.email = data.email;
             this.phone = data.phone;
+            this.cpf = data.cpf;
         },
 
+        openModalShow(data){
+           this.modalShow = true
+           this.name = data.name
+           this.email = data.email
+           this.phone = data.phone
+           this.cpf = data.cpf
+        },
+ 
         clearFields() {
           this.id = ''
             this.name = '';
             this.email = '';
             this.phone = '';
+            this.cpf = '';
         },
     },
 };
@@ -256,7 +311,16 @@ export default {
     text-align: center;
     margin: 30px 0px 0px 0px;
 }
-.btn-update{
+.btn-actions{
   margin: 0px 0px 0px 15px;
 }
+
+ul{
+    list-style: none;
+}
+
+ul li{
+    margin: 6px 0;
+}
+
 </style>
