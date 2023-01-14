@@ -83,7 +83,7 @@
 
 <script>
 
-
+import api from '../../services/index'
  
   export default{
     name: "ComponentTable",
@@ -97,7 +97,18 @@
         users: [],
       }
     },
+    mounted(){
+      this.getUsers()
+    },
     methods:{
+
+      getUsers(){
+
+      api.getUsers().then((response) => {
+      this.users = response
+      })
+
+      },
 
       openModal(){
         this.modal = true
@@ -106,60 +117,41 @@
       register(e){
         e.preventDefault()
 
-        const usuario = {
+        const obj = {
           name: this.name,
           email: this.email,
           phone: this.phone
         }
       
-         fetch("http://localhost:3000/user", {
-          method: "POST",
-          headers: {"Content-Type": "Application/json"},
-          body: JSON.stringify(usuario)
-        })
-        .then((response) => response.json())
-        .then((response) =>{
-         
-         if(response.message){
+         api.registerUser("http://localhost:3000/user", obj).then((response) =>{
+          if(response.message){
           this.$toast.add({severity:'error', summary: 'error', detail: `${response.message}`, life: 6000});
-          this.teste = true
+          
          } 
          else{
           
-          this.name = ""
-          this.email = ""
-          this.phone = ""
           this.modal = false
+          this.clearFields()
           this.getUsers()
           this.$toast.add({severity:'success', summary: 'Sucesso', detail: 'Usuario cadastrado', life: 6000});
          } 
-         
-
-         
-          
-        })
+         })
        
       },
 
       delete(id){
-        alert(id)
+       
       },
 
-      getUsers(){
-        fetch("http://localhost:3000/user", {
-        method: "GET",
-      })
-      .then((response) => response.json())
-      .then((response) => {
-        this.users = response
-        console.log(this.users)
-      })
-      }
+      clearFields(){
+        this.name = ""
+        this.email = ""
+        this.phone = ""
+      },
 
+    
     },
-    mounted(){
-      this.getUsers()
-    }
+    
   }
 </script>
 
