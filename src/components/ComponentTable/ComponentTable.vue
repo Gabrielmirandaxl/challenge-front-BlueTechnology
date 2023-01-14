@@ -69,6 +69,7 @@
             </div>
         </Dialog>
         <Toast position="top-right" />
+        <ConfirmDialog></ConfirmDialog>
 
         <div>
             <DataTable :value="users">
@@ -81,7 +82,7 @@
                         <Button
                             icon="pi pi-trash"
                             class="p-button-danger mr-1"
-                            @click="deleteUser(props.data.id)"
+                            @click="deleteUser(props.data)"
                         ></Button>
                         <Button
                             icon="pi pi-pencil"
@@ -195,10 +196,24 @@ export default {
             });
         },
 
-        deleteUser(id) {
-            api.deleteUser(id).then(() => {
-                this.getUsers();
+        deleteUser(data) {
+            this.$confirm.require({
+                message: `Deseja excluir ${data.name}`,
+                header: 'Confirme',
+                icon: 'pi pi-exclamation-triangle',
+                accept: () => {
+                    api.deleteUser(data.id).then(() => {
+                    this.getUsers();
+                    this.$toast.add({
+                        severity: 'success',
+                        summary: 'Sucesso',
+                        detail: 'Usuário deletado',
+                        life: 6000,
+                    });
+               });
+                }
             });
+           
         },
 
         openModalUpdate(data){
