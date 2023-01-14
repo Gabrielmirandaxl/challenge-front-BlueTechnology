@@ -61,6 +61,18 @@
                 <Column field="phone" header="Telefone"></Column>
                 <Column header="Ações">
               
+              <template #body="props">
+                <Button
+                  icon="pi pi-trash"
+                  class="p-button-danger mr-1"
+                  @click="delete(props.data.id)"
+                ></Button>
+                <Button
+                  icon="pi pi-pencil"
+                  class="p-button-warning"
+                  @click="abrirModalAtualizar(props.data)"
+                ></Button>
+              </template>
                   
                 </Column>
           </DataTable>
@@ -70,6 +82,7 @@
 </template>
 
 <script>
+
 
  
   export default{
@@ -110,27 +123,30 @@
          if(response.message){
           this.$toast.add({severity:'error', summary: 'error', detail: `${response.message}`, life: 6000});
           this.teste = true
-         }  
-         
-
+         } 
+         else{
+          
           this.name = ""
           this.email = ""
           this.phone = ""
-         
-          
-            this.modal = false
-        
-
+          this.modal = false
+          this.getUsers()
           this.$toast.add({severity:'success', summary: 'Sucesso', detail: 'Usuario cadastrado', life: 6000});
+         } 
+         
+
          
           
         })
        
       },
 
-    },
-    mounted(){
-      fetch("http://localhost:3000/user", {
+      delete(id){
+        alert(id)
+      },
+
+      getUsers(){
+        fetch("http://localhost:3000/user", {
         method: "GET",
       })
       .then((response) => response.json())
@@ -138,6 +154,11 @@
         this.users = response
         console.log(this.users)
       })
+      }
+
+    },
+    mounted(){
+      this.getUsers()
     }
   }
 </script>
