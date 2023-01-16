@@ -57,6 +57,17 @@ $ npm run dev
 
 <br>
 
+<br>
+
+## Layouts
+<img width="900" heigth="900"  src="https://github.com/Gabrielmirandaxl/gif/blob/main/layout1.PNG">
+<img width="900" heigth="900"  src="https://github.com/Gabrielmirandaxl/gif/blob/main/layout2.PNG">
+<img width="900" heigth="900"  src="https://github.com/Gabrielmirandaxl/gif/blob/main/layout3.PNG">
+<img width="900" heigth="900"  src="https://github.com/Gabrielmirandaxl/gif/blob/main/layout4.PNG">
+<img width="900" heigth="900"  src="https://github.com/Gabrielmirandaxl/gif/blob/main/layout5.PNG">
+
+<br>
+
 ## 🛠 tecnologias
 
 As seguintes ferramentas/tecnologias foram usadas na construção e teste do projeto.
