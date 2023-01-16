@@ -324,7 +324,7 @@ export default {
                     });
                 }
                 else{
-                    console.log(response[0])
+                   
                     this.modalSearch = true
                     this.name = response[0].name
                     this.email = response[0].email
