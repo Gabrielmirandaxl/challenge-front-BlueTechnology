@@ -28,6 +28,14 @@ export default{
       body: JSON.stringify(obj),
   }).then((response) => response.json());
     
+  },
+
+  getSearch(url){
+    return fetch(url, {
+      method: "GET",
+    })
+    .then((response) => response.json())
+     
   }
 
 }

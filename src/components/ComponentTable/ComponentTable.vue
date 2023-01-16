@@ -7,7 +7,26 @@
                 class="button-register p-button-success"
                 @click="openModal"
             />
+
+                <div class="col-12 md:col-4 search">
+                    <div class="p-inputgroup">
+                        <InputText placeholder="Pesquise um usuário com o email" v-model="search" title="Pesquise quando tiver muito usuário cadastrado" :style="{width: '300px'}"/>
+                        <Button @click="openModalSearch(search)" icon="pi pi-search" class="p-button-secondary"/>
+                    </div>
+                </div>
+
         </header>
+
+        <Dialog header="Resultado da pesquisa" v-model:visible="modalSearch">
+
+            <ul>
+            <li>Nome: {{ name }}</li>
+            <li>E-mail: {{ email }}</li>
+            <li>Telefone: {{ phone }}</li>
+            <li>CPF: {{ cpf }}</li>
+        </ul>
+            
+        </Dialog>
 
         <Dialog
             :header="msg2"
@@ -145,8 +164,10 @@ export default {
     name: 'ComponentTable',
     data() {
         return {
+            search: "",
             modal: false,
             modalShow: false,
+            modalSearch: false,
             id: '',
             name: '',
             email: '',
@@ -187,6 +208,7 @@ export default {
 
         openModal() {
             this.modal = true;
+            this.modalSearch = false
             this.clearFields()
             this.msg1 = 'cadastrar';
             this.msg2 = 'Registro de usuário';
@@ -262,7 +284,8 @@ export default {
         },
 
         openModalUpdate(data){
-          this.modal = true;
+            this.modal = true;
+            this.modalSearch = false
             this.msg1 = 'atualizar';
             this.msg2 = 'Atualizar usuário';
             this.id = data.id;
@@ -274,10 +297,42 @@ export default {
 
         openModalShow(data){
            this.modalShow = true
+           this.modalSearch = false
            this.name = data.name
            this.email = data.email
            this.phone = data.phone
            this.cpf = data.cpf
+
+        },
+
+        openModalSearch(search){
+            api.search(search).then((response) => {
+                if(response.length === 0){
+                    this.$toast.add({
+                        severity: 'error',
+                        summary: 'error',
+                        detail: `Nenhum usuário encotrado`,
+                        life: 6000,
+                    });
+                }
+                else if(response.message){
+                    this.$toast.add({
+                        severity: 'error',
+                        summary: 'error',
+                        detail: `${response.message}`,
+                        life: 6000,
+                    });
+                }
+                else{
+                    console.log(response[0])
+                    this.modalSearch = true
+                    this.name = response[0].name
+                    this.email = response[0].email
+                    this.phone = response[0].phone
+                    this.cpf = response[0].cpf
+                }
+                
+            })
         },
  
         clearFields() {
@@ -301,6 +356,10 @@ export default {
 
 .header .button-register {
     margin: 0px 0px 0px 20px;
+}
+
+.header .search{
+    margin: 0px 0px 0px 30px;
 }
 
 .personal-data {

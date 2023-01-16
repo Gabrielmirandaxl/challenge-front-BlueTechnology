@@ -15,6 +15,10 @@ export default{
 
      update(obj){
       return api.put(`${url}/${obj.id}`, obj)
+     },
+
+     search(search){
+      return api.getSearch(`${url}/pesq?email=${search}`)
      }
 
      
