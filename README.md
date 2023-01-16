@@ -2,13 +2,16 @@
 
 # Challenge - Front End - BlueTechnology
 
-CRUD feito com `javascrpit` utilizando o framework `vuejs` e o `primevue` para a vaga de estágio na empresa BlueTechnology.
-Você pode encontrar o repositório do back end clicando <a href="https://github.com/Gabrielmirandaxl/challenge-BlueTechnology">aqui</a>
+ Estou participando do processo seletivo da Blue Technology, e para melhor organização dividi o projeto em dois onde a aplicação do back-end está em outro repositorio clique <a href="https://github.com/Gabrielmirandaxl/challenge-BlueTechnology">aqui</a> para visualizar o projeto.
+ 
+Venho por meio deste repositorio entregar a aplicação `front-end`, CRUD feito com `javascrpit` utilizando o framework `vuejs` e o `primevue` . Espero que você goste!
 
 
 ## Funcionalidades
 
 - Validações nos campos
+- Tratamento de erro
+- Ver detalhes do usuário
 - Criar usuário
 - Pesquisar um usuário através do email
 - Buscar todos os usuário
@@ -61,10 +64,12 @@ As seguintes ferramentas/tecnologias foram usadas na construção e teste do pro
 
 | logo               | Framework                  | Version      |
 | :----------------- | :------------------------- | :----------: |
-| <img align="center" alt="vue" height="30" width="40" src="https://github.com/devicons/devicon/blob/master/icons/html5/html5-original-wordmark.svg">| Html  |  `5.0.0`       |
-| <img align="center" alt="vue" height="30" width="40" src="https://github.com/devicons/devicon/blob/master/icons/css3/css3-original-wordmark.svg">| Css  |  `3.0.0`       |
-| <img align="center" alt="js" height="30" width="40" src="https://github.com/devicons/devicon/blob/master/icons/javascript/javascript-original.svg"> | Javascript |  ``      |
-| <img align="center" alt="vuejs" height="30" width="40" src="https://github.com/devicons/devicon/blob/master/icons/vuejs/vuejs-line-wordmark.svg"> | Vuejs   |  `2.6.10`       |
+| <img align="center" alt="vue" height="30" width="40" src="https://github.com/tandpfun/skill-icons/blob/main/icons/HTML.svg">| Html  |  `5.0.0`       |
+| <img align="center" alt="vue" height="30" width="40" src="https://github.com/tandpfun/skill-icons/blob/main/icons/CSS.svg">| Css  |  `3.0.0`       |
+| <img align="center" alt="js" height="30" width="40" src="https://github.com/tandpfun/skill-icons/blob/main/icons/JavaScript.svg"> | Javascript |  `4.0.0`      |
+| <img align="center" alt="vuejs" height="30" width="40" src="https://github.com/tandpfun/skill-icons/blob/main/icons/VueJS-Dark.svg"> | Vuejs   |  `3.0.0`       |
+| <img align="center" alt="vuejs" height="30" width="40" src="https://github.com/tandpfun/skill-icons/blob/main/icons/Vite-Dark.svg"> | Vite   | 
+| <img align="center" alt="vuejs" height="30" width="40" src="https://user-images.githubusercontent.com/82064724…93477002-97b5453f-bd92-43c0-aea1-e53c163dcec3.png"> | Primevue   |  `3.17.0`       |
 
 
               
