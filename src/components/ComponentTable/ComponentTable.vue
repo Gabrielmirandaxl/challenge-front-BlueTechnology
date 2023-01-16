@@ -147,6 +147,7 @@
                         <Button
                             icon="pi pi-eye"
                             class="p-button-secondary btn-actions"
+                            title="detalhes do usuário"
                             @click="openModalShow(props.data)"
                         ></Button>
 
