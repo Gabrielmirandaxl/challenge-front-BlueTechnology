@@ -1,9 +1,9 @@
 # Olá, tudo bem? Me chamo Gabriel e seja bem vindo! 👋
 
-# Challenge - Back End - BlueTechnology
+# Challenge - Front End - BlueTechnology
 
 CRUD feito com `javascrpit` utilizando o framework `vuejs` e o `primevue` para a vaga de estágio na empresa BlueTechnology.
-Você pode encontrar o repositório do back end clicando <a href="https://github.com/Gabrielmirandaxl/challenge-BlueTechnology" target="_blank">aqui</a>
+Você pode encontrar o repositório do back end clicando <a href="https://github.com/Gabrielmirandaxl/challenge-BlueTechnology">aqui</a>
 
 
 ## Funcionalidades
