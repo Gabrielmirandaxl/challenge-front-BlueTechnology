@@ -62,7 +62,7 @@ As seguintes ferramentas/tecnologias foram usadas na construção e teste do pro
 | :----------------- | :------------------------- | :----------: |
 | <img align="center" alt="vue" height="30" width="40" src="https://github.com/devicons/devicon/blob/master/icons/html5/html5-original-wordmark.svg">| Html  |  `5.0.0`       |
 | <img align="center" alt="vue" height="30" width="40" src="https://github.com/devicons/devicon/blob/master/icons/css3/css3-original-wordmark.svg">| Css  |  `3.0.0`       |
-| <img align="center" alt="js" height="30" width="40" src="https://github.com/devicons/devicon/blob/master/icons/javascript/javascript-original.svg"> | Javascript |  `8.0.29`      |
+| <img align="center" alt="js" height="30" width="40" src="https://github.com/devicons/devicon/blob/master/icons/javascript/javascript-original.svg"> | Javascript |  ``      |
 | <img align="center" alt="vuejs" height="30" width="40" src="https://github.com/devicons/devicon/blob/master/icons/vuejs/vuejs-line-wordmark.svg"> | Vuejs   |  `2.6.10`       |
 
 
