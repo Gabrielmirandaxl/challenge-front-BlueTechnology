@@ -8,24 +8,30 @@
                 @click="openModal"
             />
 
-                <div class="col-12 md:col-4 search">
-                    <div class="p-inputgroup">
-                        <InputText placeholder="Pesquise um usuário com o email" v-model="search" title="Pesquise quando tiver muito usuário cadastrado" :style="{width: '300px'}"/>
-                        <Button @click="openModalSearch(search)" icon="pi pi-search" class="p-button-secondary"/>
-                    </div>
+            <div class="col-12 md:col-4 search">
+                <div class="p-inputgroup">
+                    <InputText
+                        placeholder="Pesquise um usuário com o email"
+                        v-model="search"
+                        title="Pesquise quando tiver muito usuário cadastrado"
+                        :style="{ width: '300px' }"
+                    />
+                    <Button
+                        @click="openModalSearch(search)"
+                        icon="pi pi-search"
+                        class="p-button-secondary"
+                    />
                 </div>
-
+            </div>
         </header>
 
         <Dialog header="Resultado da pesquisa" v-model:visible="modalSearch">
-
             <ul>
-            <li>Nome: {{ name }}</li>
-            <li>E-mail: {{ email }}</li>
-            <li>Telefone: {{ phone }}</li>
-            <li>CPF: {{ cpf }}</li>
-        </ul>
-            
+                <li>Nome: {{ name }}</li>
+                <li>E-mail: {{ email }}</li>
+                <li>Telefone: {{ telefone }}</li>
+                <li>CPF: {{ cpf }}</li>
+            </ul>
         </Dialog>
 
         <Dialog
@@ -70,7 +76,7 @@
                         <InputMask
                             id="inputgroup"
                             type="text"
-                            v-model="phone"
+                            v-model="telefone"
                             mask="(99)99999-9999"
                         />
                         <label for="inputgroup">Telefone</label>
@@ -106,21 +112,18 @@
         </Dialog>
         <Toast position="top-right" />
         <ConfirmDialog></ConfirmDialog>
-        
+
         <Dialog
             header="Dados do usuário"
             v-model:visible="modalShow"
             :style="{ width: '320px', height: '230px' }"
         >
-         
-        <ul>
-            <li>Nome: {{ name }}</li>
-            <li>E-mail: {{ email }}</li>
-            <li>Telefone: {{ phone }}</li>
-            <li>CPF: {{ cpf }}</li>
-        </ul>
-         
-
+            <ul>
+                <li>Nome: {{ name }}</li>
+                <li>E-mail: {{ email }}</li>
+                <li>Telefone: {{ telefone }}</li>
+                <li>CPF: {{ cpf }}</li>
+            </ul>
         </Dialog>
 
         <div>
@@ -128,10 +131,9 @@
                 <Column field="id" header="id"></Column>
                 <Column field="name" header="Nome"></Column>
                 <Column field="email" header="E-mail"></Column>
-                <Column field="phone" header="Telefone"></Column>
+                <Column field="telefone" header="Telefone"></Column>
                 <Column header="Ações">
                     <template #body="props">
-
                         <Button
                             icon="pi pi-trash"
                             class="p-button-danger mr-1"
@@ -150,7 +152,6 @@
                             title="detalhes do usuário"
                             @click="openModalShow(props.data)"
                         ></Button>
-
                     </template>
                 </Column>
             </DataTable>
@@ -165,14 +166,14 @@ export default {
     name: 'ComponentTable',
     data() {
         return {
-            search: "",
+            search: '',
             modal: false,
             modalShow: false,
             modalSearch: false,
             id: '',
             name: '',
             email: '',
-            phone: '',
+            telefone: '',
             cpf: '',
             msg1: '',
             msg2: '',
@@ -191,37 +192,41 @@ export default {
         },
 
         enviar() {
-
-            let user = {
-                id: this.id,
-                name: this.name,
-                email: this.email,
-                phone: this.phone,
-                cpf: this.cpf,
-            };
-
-            if (user.id != '') {
+            if (this.id != '') {
+                let user = {
+                    Id: this.id,
+                    Name: this.name,
+                    Email: this.email,
+                    telefone: this.telefone,
+                    Cpf: this.cpf,
+                };
                 this.updateUser(user);
             } else {
+                let user = {
+                    Name: this.name,
+                    Email: this.email,
+                    telefone: this.telefone,
+                    Cpf: this.cpf,
+                };
                 this.registerUser(user);
             }
         },
 
         openModal() {
             this.modal = true;
-            this.modalSearch = false
-            this.clearFields()
+            this.modalSearch = false;
+            this.clearFields();
             this.msg1 = 'cadastrar';
             this.msg2 = 'Registro de usuário';
         },
 
         registerUser(user) {
             api.registerUser(user).then((response) => {
-                if (response.message) {
+                if (response.Message) {
                     this.$toast.add({
                         severity: 'error',
                         summary: 'error',
-                        detail: `${response.message}`,
+                        detail: `${response.Message}`,
                         life: 6000,
                     });
                 } else {
@@ -242,25 +247,24 @@ export default {
 
         updateUser(data) {
             api.update(data).then((response) => {
-              if(response.message){
-                this.$toast.add({
+                if (response.Message) {
+                    this.$toast.add({
                         severity: 'error',
                         summary: 'error',
-                        detail: `${response.message}`,
+                        detail: `${response.Message}`,
                         life: 6000,
                     });
-              }else{
-                this.getUsers()
-                 this.clearFields()
-                 this.modal = false
-                 this.$toast.add({
+                } else {
+                    this.getUsers();
+                    this.clearFields();
+                    this.modal = false;
+                    this.$toast.add({
                         severity: 'success',
                         summary: 'Sucesso',
                         detail: 'Usuario atualizado',
                         life: 6000,
                     });
-              }
-               
+                }
             });
         },
 
@@ -271,76 +275,67 @@ export default {
                 icon: 'pi pi-exclamation-triangle',
                 accept: () => {
                     api.deleteUser(data.id).then(() => {
-                    this.getUsers();
+                        this.getUsers();
+                        this.$toast.add({
+                            severity: 'success',
+                            summary: 'Sucesso',
+                            detail: 'Usuário deletado',
+                            life: 6000,
+                        });
+                    });
+                },
+            });
+        },
+
+        openModalUpdate(data) {
+            api.getUser(data.id).then((response) => {
+                this.modal = true;
+                this.modalSearch = false;
+                this.msg1 = 'atualizar';
+                this.msg2 = 'Atualizar usuário';
+                this.id = response.id;
+                this.name = response.name;
+                this.email = response.email;
+                this.telefone = response.telefone;
+                this.cpf = response.cpf;
+            });
+        },
+
+        openModalShow(data) {
+            api.getUser(data.id).then((response) => {
+                this.modalShow = true;
+                this.modalSearch = false;
+                this.name = response.name;
+                this.email = response.email;
+                this.telefone = response.telefone;
+                this.cpf = response.cpf;
+            });
+        },
+
+        openModalSearch(search) {
+            api.search(search).then((response) => {
+                if (response.Message) {
                     this.$toast.add({
-                        severity: 'success',
-                        summary: 'Sucesso',
-                        detail: 'Usuário deletado',
+                        severity: 'error',
+                        summary: 'error',
+                        detail: `${response.Message}`,
                         life: 6000,
                     });
-               });
+                } else {
+                    this.modalSearch = true;
+                    this.name = response.name;
+                    this.email = response.email;
+                    this.telefone = response.telefone;
+                    this.cpf = response.cpf;
                 }
             });
-           
         },
 
-        openModalUpdate(data){
-            this.modal = true;
-            this.modalSearch = false
-            this.msg1 = 'atualizar';
-            this.msg2 = 'Atualizar usuário';
-            this.id = data.id;
-            this.name = data.name;
-            this.email = data.email;
-            this.phone = data.phone;
-            this.cpf = data.cpf;
-        },
-
-        openModalShow(data){
-           this.modalShow = true
-           this.modalSearch = false
-           this.name = data.name
-           this.email = data.email
-           this.phone = data.phone
-           this.cpf = data.cpf
-
-        },
-
-        openModalSearch(search){
-            api.search(search).then((response) => {
-                if(response.length === 0){
-                    this.$toast.add({
-                        severity: 'error',
-                        summary: 'error',
-                        detail: `Nenhum usuário encotrado`,
-                        life: 6000,
-                    });
-                }
-                else if(response.message){
-                    this.$toast.add({
-                        severity: 'error',
-                        summary: 'error',
-                        detail: `${response.message}`,
-                        life: 6000,
-                    });
-                }
-                else{
-                   
-                    this.modalSearch = true
-                    this.name = response[0].name
-                    this.email = response[0].email
-                    this.phone = response[0].phone
-                    this.cpf = response[0].cpf
-                }
-                
-            })
-        },
- 
         clearFields() {
-          this.id = ''
+            this.id = '';
             this.name = '';
             this.email = '';
-            this.phone = '';
+            this.telefone = '';
             this.cpf = '';
         },
     },
@@ -359,7 +354,7 @@ export default {
     margin: 0px 0px 0px 20px;
 }
 
-.header .search{
+.header .search {
     margin: 0px 0px 0px 30px;
 }
 
@@ -371,16 +366,15 @@ export default {
     text-align: center;
     margin: 30px 0px 0px 0px;
 }
-.btn-actions{
-  margin: 0px 0px 0px 15px;
+.btn-actions {
+    margin: 0px 0px 0px 15px;
 }
 
-ul{
+ul {
     list-style: none;
 }
 
-ul li{
+ul li {
     margin: 6px 0;
 }
-
 </style>
